@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "avr",
+      "displayName": "AVR",
+      "description": "AVR build",
+      "binaryDir": "${sourceDir}/build/avr",
+      "toolchainFile": "cmake/avr-toolchain.cmake"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "avr"
+    }
+  ]
+}

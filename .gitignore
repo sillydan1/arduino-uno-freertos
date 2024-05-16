@@ -1,0 +1,4 @@
+build
+.cache
+**/compile_commands.json
+optiboot_atmega328.hex
