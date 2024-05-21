@@ -12,8 +12,11 @@ CPMAddPackage("gh:freertos/freertos-kernel#V11.0.0")
 add_avr_executable(${PROJECT_NAME}
     src/main.cpp
     src/hooks.cpp
+    src/cli/FreeRTOS_CLI.c
+    src/cli/uart.cpp
 )
 target_compile_definitions(${PROJECT_NAME}.elf PUBLIC F_CPU=16000000UL)
+target_compile_definitions(${PROJECT_NAME}.elf PUBLIC BAUD=9600)
 target_include_directories(${PROJECT_NAME}.elf PUBLIC
     src
     ${freertos-kernel_SOURCE_DIR}/include
