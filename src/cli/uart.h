@@ -8,7 +8,7 @@ namespace uart {
     void send_str(const char* str);
     void send_strn(const char* str, unsigned int len);
     unsigned int get_line(char* buf, unsigned int max);
-    char get_char();
+    char get_char(unsigned int timeout_ms = 100);
 }
 
 #endif

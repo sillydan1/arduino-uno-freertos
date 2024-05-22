@@ -1,6 +1,7 @@
 #include "FreeRTOSConfig.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 #include "cli/uart.h"
 
 
@@ -19,8 +20,9 @@ void read_and_respond(void* param) {
         uart::send_str("> ");
         auto n = uart::get_line(buf, 31);
         buf[n] = '\0';
-        uart::send_str("Hello, ");
+        uart::send_str("\n\rHello, ");
         uart::send_str(buf);
+        uart::send_str("\n\r");
     }
 }
 
