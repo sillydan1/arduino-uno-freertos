@@ -6,11 +6,21 @@
 
 void blink_debug_led(void* param) {
     while(true) {
-        uart::send_str("Hello, World!");
         PORTB |= (1<<PB5);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         PORTB &= ~(1<<PB5);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+void read_and_respond(void* param) {
+    char buf[32];
+    while(true) {
+        uart::send_str("> ");
+        auto n = uart::get_line(buf, 31);
+        buf[n] = '\0';
+        uart::send_str("Hello, ");
+        uart::send_str(buf);
     }
 }
 
@@ -22,12 +32,18 @@ void init() {
 
 int main() {
     init();
-    xTaskCreate(blink_debug_led, // task func
-            "BLINK", // task name
-            100, // max stack
-            NULL, // no args
-            tskIDLE_PRIORITY, // priority
-            NULL); // task handle
+    xTaskCreate(blink_debug_led,
+            "BLINK",
+            100,
+            NULL,
+            tskIDLE_PRIORITY,
+            NULL);
+    xTaskCreate(read_and_respond,
+            "Console",
+            256,
+            NULL,
+            tskIDLE_PRIORITY,
+            NULL);
     vTaskStartScheduler(); // runs forever
     return 0;
 }

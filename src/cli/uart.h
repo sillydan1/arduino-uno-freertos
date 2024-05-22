@@ -7,6 +7,8 @@ namespace uart {
     void send_char(char character);
     void send_str(const char* str);
     void send_strn(const char* str, unsigned int len);
+    unsigned int get_line(char* buf, unsigned int max);
+    char get_char();
 }
 
 #endif
