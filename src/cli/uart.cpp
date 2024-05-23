@@ -23,8 +23,6 @@ namespace uart {
 	// BOOKMARK: FreeRTOS/Demo/Common/Minimal/comtest.c
 	//		     as well as FreeRTOS/Demo/AVR_ATMega4809_Atmel_Studio/RTOSDemo/serial/serial.c
 
-	// TODO: ISR handlers, so we dont stall the task(s)
-	// TODO: Receive
 	// TODO: Consider doing this as a class
 	// TODO: Receive and send are not cooperative and stalls the scheduler.
 	void init() {
@@ -65,11 +63,11 @@ namespace uart {
 		return '\0';
 	}
 
-    unsigned int get_line(char* buf, unsigned int max) {
+	unsigned int get_line(char* buf, unsigned int max) {
 		unsigned int i = 0;
 		while(i < max) {
 			char c;
-			if(xQueueReceive(rx_buf, &c, 100)) {
+			if(xQueueReceive(rx_buf, &c, 100 / portTICK_PERIOD_MS)) {
 				if(c == '\r')
 					break;
 				buf[i++] = c;

@@ -573,5 +573,6 @@
  * global buffer is just set to be one byte long as it is not used and should not
  * take up unnecessary RAM. */
 #define configCOMMAND_INT_MAX_OUTPUT_SIZE 1
+#define configAPPLICATION_PROVIDES_cOutputBuffer 0
 
 #endif /* FREERTOS_CONFIG_H */

@@ -8,12 +8,13 @@ target_compile_definitions(freertos_config INTERFACE projCOVERAGE_TEST=0)
 set(FREERTOS_HEAP "4" CACHE STRING "" FORCE)
 set(FREERTOS_PORT "GCC_ATMEGA" CACHE STRING "" FORCE)
 file(DOWNLOAD "https://raw.githubusercontent.com/Optiboot/optiboot/master/optiboot/bootloaders/optiboot/optiboot_atmega328.hex" optiboot_atmega328.hex)
+add_compile_options(-Os)
 CPMAddPackage("gh:freertos/freertos-kernel#V11.0.0")
 add_avr_executable(${PROJECT_NAME}
     src/main.cpp
     src/hooks.cpp
-    src/cli/FreeRTOS_CLI.c
     src/cli/uart.cpp
+    src/cli/FreeRTOS_CLI.c
 )
 target_compile_definitions(${PROJECT_NAME}.elf PUBLIC F_CPU=16000000UL)
 target_compile_definitions(${PROJECT_NAME}.elf PUBLIC BAUD=9600)
