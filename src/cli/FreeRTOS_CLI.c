@@ -25,6 +25,7 @@
  */
 
 /* Standard includes. */
+#include <stdio.h>
 #include <string.h>
 #include <stdint.h>
 
@@ -209,7 +210,8 @@ size_t xCommandStringLength;
 	else
 	{
 		/* pxCommand was NULL, the command was not found. */
-		strncpy( pcWriteBuffer, "Command not recognised.  Enter 'help' to view a list of available commands.\r\n", xWriteBufferLen );
+		// strncpy( pcWriteBuffer, "Command not recognised.  Enter 'help' to view a list of available commands.\r\n", xWriteBufferLen );
+		sprintf(pcWriteBuffer, "Command not recognised \"%s\"\r\n", pcCommandInput);
 		xReturn = pdFALSE;
 	}
 
